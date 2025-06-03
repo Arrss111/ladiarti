@@ -11,17 +11,7 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">LADIARTI</a>
-            <form class="d-flex mx-auto" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light" type="submit"><i class="fa fa-camera"></i></button>
-            </form>
-            <div>
-                <a href="#" class="text-white me-3"><i class="fa fa-shopping-cart"></i></a>
-                <a href="#" class="text-white">SIGN IN / SIGN UP</a>
-            </div>
-        </div>
+        @include('layout.navbar')
     </nav>
 
     <!-- Menu -->
@@ -42,14 +32,24 @@
 
     <!-- Products -->
     <section class="container py-4">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        @foreach ($products as $product)
-            @include('components.product-card', [
-                'image' => $product['image'],
-                'name' => $product['name'],
-                'price' => $product['price']
-            ])
-        @endforeach
+
+
+
+    <div class="row">
+    @foreach ($products as $product)
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="{{ asset('images/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}">
+                <div class="card-body d-flex flex-column"> {{-- Tambahkan d-flex dan flex-column di sini --}}
+                    <h5 class="card-title">{{ $product->name }}</h5>
+                    <div class="d-flex justify-content-between align-items-center mt-auto"> {{-- Ini pembungkus baru --}}
+                        <p class="card-text mb-0">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
+                        <a href="{{ route('product.show', ['id' => $product->id]) }}" class="btn btn-dark">Buy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
     </div>
     </section>
 

@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\View;
+use Illuminate\Http\Request;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $products = [
-            ['image' => 'nike-kyrie.png', 'name' => 'Nike Kyrie', 'price' => 2500000],
-            ['image' => 'nike-backpack.png', 'name' => 'Nike Backpack', 'price' => 559000],
-            ['image' => 'beads.png', 'name' => 'Beads', 'price' => 5000],
-            ['image' => 'tarcktop.png', 'name' => 'Tarcktop', 'price' => 800000],
-            ['image' => 'datejust.png', 'name' => 'Datejust 31', 'price' => 265585000],
-            ['image' => 'classic-cap.png', 'name' => 'Classic Cap', 'price' => 275000],
-        ];
+        // Ambil semua produk dari database
+        $products = Product::all();
 
+        // Kirim ke view homepage
         return view('home', compact('products'));
     }
 }

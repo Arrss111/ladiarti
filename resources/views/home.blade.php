@@ -32,14 +32,15 @@
 
     <!-- Products -->
     <section class="container py-4">
-
-
-
     <div class="row">
     @foreach ($products as $product)
         <div class="col-md-4 mb-4">
             <div class="card h-100">
-                <img src="{{ asset('images/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}">
+                @php
+                    $images = json_decode($product->image, true); // Ubah dari JSON ke array
+                    $mainImage = $images[0] ?? 'default.png'; // Ambil gambar pertama atau fallback
+                @endphp
+                <img src="{{ asset('images/' . $mainImage) }}" class="card-img-top" alt="{{ $product->name }}">
                 <div class="card-body d-flex flex-column"> {{-- Tambahkan d-flex dan flex-column di sini --}}
                     <h5 class="card-title">{{ $product->name }}</h5>
                     <div class="d-flex justify-content-between align-items-center mt-auto"> {{-- Ini pembungkus baru --}}

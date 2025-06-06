@@ -5,16 +5,21 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
+                    <a class="navbar-brand fw-bold" href="{{ route('home') }}">LADIARTI</a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+                    @guest
+                        <a href="{{ route('login') }}" class="btn btn-primary m-2">Login</a>
+                        <a href="{{ route('register') }}" class="btn btn-outline-primary m-2">Register</a>
+                    @else
+                        <a href="{{ route('dashboard') }}" class="btn btn-success m-2">Dashboard</a>
+                        <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                            @csrf
+                            <button type="submit" class="btn btn-danger m-2">Logout</button>
+                        </form>
+                    @endguest
                 </div>
             </div>
 
@@ -49,6 +54,10 @@
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
+                        
+                        <x-dropdown-link :href="route('dashboard')">
+                        {{ __('Dashboard') }}
+                        </x-dropdown-link>
                         </form>
                     </x-slot>
                 </x-dropdown>

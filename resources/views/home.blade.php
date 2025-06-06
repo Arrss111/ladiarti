@@ -6,13 +6,13 @@
     <title>Ladiarti</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    @vite('resources/CSS/app.css')
+    @vite('resources/css/home.css')
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
-        @include('layout.navbar')
-    </nav>
+    
+    @include('layout.navbar')
+    
 
     <!-- Menu -->
     <div class="bg-primary text-white text-center py-2">
@@ -84,13 +84,13 @@
             <div class="col-md-6">
                 <div class="p-4 bg-dark text-white rounded">
                     <p>⭐⭐⭐⭐⭐<br>Bintang 5 buat Ladiarti!!...</p>
-                    <p><strong>nama pengguna</strong></p>
+                    <p><strong>valerie</strong></p>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="p-4 bg-dark text-white rounded">
                     <p>⭐⭐⭐⭐⭐<br>Pengalaman yang sangat menyenangkan...</p>
-                    <p><strong>nama pengguna</strong></p>
+                    <p><strong>Arga</strong></p>
                 </div>
             </div>
         </div>

@@ -21,8 +21,6 @@
       <img id="mainProductImage" src="{{ asset('images/' . $mainImage) }}">
   </div>
 
-
-
   <div class="product-info">
     <h1>{{ $product->name }}</h1>
     <h3>{{ $product->category }}</h3>

@@ -3,23 +3,24 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
-                <!-- Logo -->
+                <!-- Navigation Links -->
                 <div class="shrink-0 flex items-center">
                     <a class="navbar-brand fw-bold" href="{{ route('home') }}">LADIARTI</a>
-                </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <a href="{{ route('dashboard') }}" class="btn btn-success m-2">Dashboard</a>
                     @guest
                         <a href="{{ route('login') }}" class="btn btn-primary m-2">Login</a>
                         <a href="{{ route('register') }}" class="btn btn-outline-primary m-2">Register</a>
                     @else
-                        <a href="{{ route('dashboard') }}" class="btn btn-success m-2">Dashboard</a>
+                        
                         <form method="POST" action="{{ route('logout') }}" class="d-inline">
                             @csrf
                             <button type="submit" class="btn btn-danger m-2">Logout</button>
                         </form>
                     @endguest
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    
                 </div>
             </div>
 
@@ -45,16 +46,6 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        
                         <x-dropdown-link :href="route('dashboard')">
                         {{ __('Dashboard') }}
                         </x-dropdown-link>

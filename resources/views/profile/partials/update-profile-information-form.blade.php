@@ -24,6 +24,18 @@
         </div>
 
         <div>
+            <x-input-label for="location_description" :value="__('location_description')" />
+            <x-text-input id="location_description" name="location_description" type="text" class="mt-1 block w-full" :value="old('location_description', $user->location_description)" required autofocus autocomplete="location_description" />
+            <x-input-error class="mt-2" :messages="$errors->get('location_description')" />
+        </div>
+
+        <div>
+            <x-input-label for="phone_number" :value="__('phone_number')" />
+            <x-text-input id="phone_number" name="phone_number" type="text" class="mt-1 block w-full" :value="old('phone_number', $user->phone_number)" required autofocus autocomplete="phone_number" />
+            <x-input-error class="mt-2" :messages="$errors->get('phone_number')" />
+        </div>
+
+        <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />

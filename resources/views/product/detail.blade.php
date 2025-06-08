@@ -26,10 +26,14 @@
     <h3>{{ $product->category }}</h3>
     <p>{{ $product->description }}</p>
     <p class="price">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-    <button class="buy-button">Buy</button>
+    @guest
+      <a class="btn btn-outline-primary m-2">Login terlebih dahulu, untuk membeli product ini</a>
+    @else
+      <a href="{{ route('payment', $product->id) }}" class="btn btn-primary">Beli Sekarang</a>
+    @endguest
   </div>
 </div>
-
+ 
 <script>
   function changeImage(imageUrl) {
     document.getElementById('mainProductImage').src = imageUrl;

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PaymentController;
 
 Route::get('/welcome', function () {
     return view('welcome');
@@ -19,7 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+ 
 require __DIR__.'/auth.php';
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -32,5 +33,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/products/create', [AdminController::class, 'create'])->name('admin.products.create');
 });
 
+Route::get('/payment/{id}', [PaymentController::class, 'show'])->name('payment')->middleware(['auth']);
 
 

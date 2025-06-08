@@ -55,7 +55,15 @@
     </div>
 
     <div class="text-center mt-4">
-        <button class="btn btn-primary px-5 py-2">Lanjutkan</button>
+        <form action="{{ route('order.store') }}" method="POST">
+            @csrf
+            <input type="hidden" name="product_id" value="{{ $product->id }}">
+            <input type="hidden" name="total_price" value="{{ $product->price }}">
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary px-5 py-2">Lanjutkan</button>
+            </div>
+        </form>
     </div>
+
 </div>
 @endsection

@@ -6,7 +6,19 @@
                 <!-- Navigation Links -->
                 <div class="shrink-0 flex items-center">
                     <a class="navbar-brand fw-bold" href="{{ route('home') }}">LADIARTI</a>
-                    <a href="{{ route('dashboard') }}" class="btn btn-success m-2">Dashboard</a>
+                    @php
+                        $user = Auth::user();
+                    @endphp
+
+                    @if (auth()->check() && auth()->user()->role === 'admin')
+                        <a href="{{ route('admin-dashboard') }}" class="btn btn-success m-2">Dashboard</a>
+                        <a href="{{ route('admin.products.create') }}" class="btn btn-success m-2">Tambah Produk</a>
+                        <a href="{{ route('admin.orders') }}" class="btn btn-success m-2">Lihat daftar pesanan</a>
+                    @else
+                        <a href="{{ route('dashboard') }}" class="btn btn-success m-2">Dashboard</a>
+                    @endif
+
+
                     @guest
                         <a href="{{ route('login') }}" class="btn btn-primary m-2">Login</a>
                         <a href="{{ route('register') }}" class="btn btn-outline-primary m-2">Register</a>

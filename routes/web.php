@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\AdminOrderController;
 
 Route::get('/welcome', function () {
     return view('welcome');
@@ -37,3 +38,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::get('/payment/{id}', [PaymentController::class, 'show'])->name('payment')->middleware(['auth']);
 
 Route::post('/order/store', [OrderController::class, 'store'])->middleware(['auth'])->name('order.store');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin-dashboard', [AdminController::class, 'index'])->name('admin-dashboard');
+    Route::get('/admin/products/create', [AdminController::class, 'create'])->name('admin.products.create');
+    Route::post('/admin/products/store', [AdminController::class, 'store'])->name('admin.products.store');
+    Route::get('/admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders');
+});
+
+
+ 

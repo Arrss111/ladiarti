@@ -13,6 +13,8 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -25,9 +27,8 @@ Route::middleware('auth')->group(function () {
  
 require __DIR__.'/auth.php';
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-
 // Untuk detail produk
+
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 
 Route::middleware(['auth', 'admin'])->group(function () {

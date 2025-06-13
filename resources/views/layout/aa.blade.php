@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Product Detail</title>
-    @vite('resources/CSS/product.css')
+    @vite('resources/js/app.js')
 </head>
 <body>
     @yield('content')

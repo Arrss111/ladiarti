@@ -39,49 +39,34 @@
     <!-- Products -->
     <section class="container py-4">
     <div class="row">
-    @foreach ($products as $product)
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                @php
-                    $images = json_decode($product->image, true); // Ubah dari JSON ke array
-                    $mainImage = $images[0] ?? 'default.png'; // Ambil gambar pertama atau fallback
-                @endphp
-                <img src="{{ asset('images/' . $mainImage) }}" class="card-img-top" alt="{{ $product->name }}">
-                <div class="card-body d-flex flex-column"> {{-- Tambahkan d-flex dan flex-column di sini --}}
-                    <h5 class="card-title">{{ $product->name }}</h5>
-                    <div class="d-flex justify-content-between align-items-center mt-auto"> {{-- Ini pembungkus baru --}}
-                        <p class="card-text mb-0">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-                        <a href="{{ route('product.show', ['id' => $product->id]) }}" class="btn btn-dark">Buy</a>
+        @foreach ($products as $product)
+            <div class="col-md-4 col-sm-6 mb-4"> <!-- 3 kolom di desktop, 2 di tablet -->
+                <div class="card h-100">
+                    @php
+                        $images = json_decode($product->image, true); // Ubah dari JSON ke array
+                        $mainImage = $images[0] ?? 'default.png'; // Ambil gambar pertama atau fallback
+                    @endphp
+                    <img src="{{ asset('images/' . $mainImage) }}" class="card-img-top" alt="{{ $product->name }}">
+                    <div class="card-body d-flex flex-column"> {{-- Tambahkan d-flex dan flex-column di sini --}}
+                        <h5 class="card-title">{{ $product->name }}</h5>
+                        <p class="card-text">{{ $product->description }}</p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <p class="mb-0">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
+                            <a href="{{ route('product.show', ['id' => $product->id]) }}" class="btn btn-dark">Buy</a>
+                        </div>
+
+                        {{-- Tambah ke Keranjang --}}
+                        <form action="{{ route('cart.add', $product->id) }}" method="POST" class="mt-2">
+                            @csrf
+                            <button type="submit" class="btn btn-success w-100">Tambah ke Keranjang</button>
+                        </form>
+
                     </div>
                 </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
     </div>
-    </section>
-
-
-    <!-- About Section -->
-    <section class="bg-dark text-white py-5">
-        <div class="container">
-            <h2 class="text-center mb-4">ABOUT US</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>LADIARTI</h5>
-                    <p>LADIARTI Indonesia merupakan E-Commerce terdepan dalam berbelanja...</p>
-                </div>
-                <div class="col-md-6">
-                    <h5>Layanan</h5>
-                    <ul>
-                        <li>Bantuan</li>
-                        <li>Hubungi Kami</li>
-                        <li>Cara Berjualan</li>
-                        <li>Produk di Ladiarti</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+</section>
 
     <!-- Reviews -->
     <section class="container py-5">

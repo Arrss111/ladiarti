@@ -27,6 +27,11 @@ Route::middleware('auth')->group(function () {
  
 require __DIR__.'/auth.php';
 
+Route::get('/auth', function () {
+    return view('auth.auth');
+});
+
+
 // Untuk detail produk
 
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
@@ -46,6 +51,25 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/products/store', [AdminController::class, 'store'])->name('admin.products.store');
     Route::get('/admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders');
 });
+use App\Http\Controllers\CartController;
 
+// Rute untuk menampilkan halaman keranjang
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
- 
+// Rute untuk menambahkan produk ke keranjang
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+
+// Rute untuk mengupdate jumlah produk di keranjang
+Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+
+// Rute untuk menghapus produk dari keranjang
+Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+
+use Illuminate\Http\Request;
+
+// Rute untuk pencarian
+Route::get('/search', function (Request $request) {
+    $keyword = $request->input('search');
+    // Untuk sekarang, kita redirect balik dengan pesan (sementara aja)
+    return redirect()->back()->with('success', "Pencarian untuk: $keyword");
+})->name('search');
